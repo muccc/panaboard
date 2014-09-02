@@ -8,6 +8,8 @@ Content
 1. Info
 2. Pinout J3
 3. Singal Analysis
+4. Arduino
+5. Picture Info
 A. Licence
 
 1. Info
@@ -15,8 +17,8 @@ A. Licence
 
 Hardware:
 - Panasonic Panaboard KX-B550S
+- Arduino Mega
 - Raspberry Pi
-- 5V/3.3V Level-Converter
 - Some wireing
 
 Goal:
@@ -47,13 +49,34 @@ No Scanning:
 
 Data: always zero
 CLK: some bursts for 500us after NEWLINE
-NEWLINW: 13 us pulse every 7.5ms
+NEWLINE: 13 us pulse every 7.5ms
 
 Scanning:
 ---------
 
-Data: 1 = black, 0 = white on rising(?) edge of CLK
-CLK:
+Data: 1 = black, 0 = white on rising edge of CLK
+CLK: about 650-700 kHz when line is scanned
+NEWLINE: 13us pulse just before line gets scanned
+D0: Is high somewhere in line for some CLK-cycles when line contains scanned piture
+
+4. Arduino-Mega wireing
+=======================
+
+Panaboard | Arduino
+---------------------
+GND       | GND
+Data      | 51 (SPI_MOSI)
+CLK       | 52 (SPI_CLK)
+NEWLINE   | 3  (INT1)
+D0        | 2
+
+5. Picture Info
+===============
+
+Size: 1440x1604 (pixel x lines)
+Color: BW (1bit)
+1st pixel: bottom left
+lines: vertical
 
 A. Licence
 ==========
